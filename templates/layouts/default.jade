@@ -1,0 +1,37 @@
+include ../mixins/flash-messages
+
+include header.jade
+
+	//- HTML BODY
+	body: .container-wrap
+		//- HEADER
+		#header
+			div(role="navigation").navbar.navbar-default
+				.container-fluid
+						h1.navbar-brand: a(href='/') Modern Moto
+						ul.nav.navbar-nav.navbar-left
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null), id=('nav_' + link.key)): a(href=link.href)= link.label
+
+		//- BODY
+		#body
+
+			block intro
+
+			+flash-messages(messages)
+
+			block content
+
+
+		//- FOOTER
+		#footer
+
+			p Copyright &copy; 2011, all rights Reserved. Images are property of their respective owners. To report inaccurate information or to have your bike removed please <a href="/contact">email me</a>.  Site designed and developed by <a href="http://www.chrismills.la" target=" _blank">Chris Mills</a>.
+			p Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
+
+		script(src='/js/lib/jquery/jquery-1.11.0.min.js')
+
+		if user && user.canAccessKeystone
+			script(src='/keystone/js/content/editor.js')
+
+		block js

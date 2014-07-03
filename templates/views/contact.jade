@@ -1,0 +1,26 @@
+extends ../layouts/subpage
+
+block intro
+	.container
+		h2 Contact
+		#stripes
+		
+block content
+	.container
+		if enquirySubmitted
+			p Thanks.
+		else
+				form(method='post', id='form')
+					input(type='hidden', name='action', value='contact')
+					.form-group(class=validationErrors.name ? 'has-error' : null)
+						label Name
+						input(type='text', name='name.full', value=formData['name.full'], class='input', required).form-control
+					.form-group(class=validationErrors.email ? 'has-error' : null)
+						label Email
+						input(type='email', name='email', value=formData.email, class='input', required).form-control
+					.form-group(class=validationErrors.message ? 'has-error' : null)
+						label Message
+						textarea(name='message', placeholder='Leave us a message...' rows=4, required).form-control= formData.message
+					.clear
+					.form-actions
+						button(type='submit').btn.btn-primary#form_submit
